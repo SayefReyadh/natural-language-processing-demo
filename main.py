@@ -36,3 +36,12 @@ def find_featires(document):
 print((find_featires(movie_reviews.words("neg/cv000_29416.txt"))))
 
 featuresets = [(find_featires(rev) , category) for (rev,category) in documents]
+
+training_set = featuresets[:1900]
+testing_set = featuresets[1900:]
+
+# posterior = prior occurences x liklihood / evdience
+
+classifier = nltk.NaiveBayesClassifier.train(training_set)
+print("Naive Bayes Algorithm Accuracy Percent : " , (nltk.classify.accuracy(classifier,testing_set))*100)
+classifier.show_most_informative_features(15)
