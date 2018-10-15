@@ -23,3 +23,16 @@ for w in movie_reviews.words():
 
 all_words = nltk.FreqDist(all_words)
 
+word_features = list (all_words.keys())[:3000]
+
+def find_featires(document):
+    words = set(document)
+    features = {}
+    for w in word_features:
+        features[w] = (w in words)
+
+    return  features
+
+print((find_featires(movie_reviews.words("neg/cv000_29416.txt"))))
+
+featuresets = [(find_featires(rev) , category) for (rev,category) in documents]
